@@ -1,0 +1,44 @@
+//Krishna Upadhyayula
+//CSE 142
+//TA: Ian Hadden
+//Bear Class 
+import java.awt.*;
+
+//Makes a bear using the parent Critter class
+public class Bear extends Critter{
+   private int counter = 0;
+   private boolean polar;
+   
+   //Boolean variable for polar or not
+   public Bear(boolean polar){
+      this.polar = polar;
+   }
+   
+   //If boolean is true color is white and if not it is black
+   public Color getColor(){
+      if(this.polar){
+         return Color.WHITE;
+      }else
+         return Color.BLACK;
+   }
+   
+   //Returns slashes for bears and alternates after every move
+   public String toString(){
+      if(counter % 2 == 1){
+         return "/";
+      }else
+         return "\\";
+   }
+   
+   //Uses info to let bear move and infect
+   public Action getMove(CritterInfo info){
+      counter++;
+      if(info.getFront() == Neighbor.OTHER){
+         return Action.INFECT;
+      }else if(info.getFront() == Neighbor.EMPTY){
+         return Action.HOP;
+      }else{
+         return Action.LEFT;
+      }
+   }
+}  
