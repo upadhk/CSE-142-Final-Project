@@ -1,0 +1,50 @@
+//Krishna Upadhyayula
+//12/6/16
+//CSE 142 
+//TA: Ian Hadden
+//Assignment 9 Lion Class 
+
+import java.util.*;
+import java.awt.*;
+
+//This class implements a Lion critter using the parent Critter class
+
+public class Lion extends Critter{
+   
+   private int count = 0;
+   private int x;
+   
+   //Changes the color every 3 steps
+   
+   public Color getColor(){
+      Random  r = new Random();
+      if(count % 3 == 0){
+         x = r.nextInt(3);
+      }
+      if(x == 0){
+         return Color.RED;
+      }else if(x == 1){
+         return Color.GREEN;
+      }else
+         return Color.BLUE;
+   }
+   
+   //Returns an L for the lion
+   public String toString(){
+      return "L";
+   }
+   
+   //Using the parameter of info it lets the lion move and infect
+   public Action getMove(CritterInfo info){
+      count++;
+      if(info.getFront() == Neighbor.OTHER){
+         return Action.INFECT;
+      }else if(info.getFront() == Neighbor.WALL || info.getRight() == Neighbor.WALL){
+         return Action.LEFT;
+      }else if(info.getFront() == Neighbor.SAME){
+         return Action.RIGHT;
+      }else
+         return Action.HOP;
+   }
+}
+
