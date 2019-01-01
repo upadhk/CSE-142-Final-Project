@@ -1,0 +1,44 @@
+//Krishna Upadhyayula
+//CSE 42
+//TA: Ian Hadden
+//Giant Class
+
+import java.awt.*;
+
+//Makes a giant from parent Critter class
+public class Giant extends Critter{
+   
+   private static final String[] arr = {"fee", "fie", "foe", "fum"};
+   private int count;
+   private int arrWord;
+   
+   //The giant representation is gray
+   public Color getColor(){
+      return Color.GRAY;
+   }  
+   
+   //Uses info to let giant move and infect
+   public Action getMove(CritterInfo info){
+      count++;
+      if(info.getFront() == Neighbor.OTHER){
+         return Action.INFECT;
+      }else if(info.getFront() == Neighbor.EMPTY){
+         return Action.HOP;
+      }else{
+         return Action.RIGHT;
+      }
+   }
+   
+   //Returns a word from the array and changes every 6 moves 
+   public String toString(){
+      if(count % 6 == 0){
+         arrWord++;
+      }
+      if(arrWord == 4){
+         arrWord = 0;
+      }
+      return arr[arrWord];
+   }
+   
+   
+}
